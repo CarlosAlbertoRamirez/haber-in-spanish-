@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El verbo HABER | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --a1:#34d399;--a2:#f97316;--b1:#60a5fa;--b1p:#a78bfa;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 20% 10%,rgba(167,139,250,.12),transparent 35%),radial-gradient(ellipse at 80% 15%,rgba(34,211,153,.07),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(940px,96%);margin:14px auto 60px;display:flex;flex-direction:column;gap:14px}
+/* HERO */
+.hero{border-radius:22px;padding:26px 30px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.hero-in{position:relative;z-index:1}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.logo-box{width:56px;height:56px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--magenta)}
+.hero h1{font-family:var(--display);font-size:clamp(1.2rem,3vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--a1),#fff 40%,var(--b1p));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.86rem;margin-top:3px;line-height:1.55}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 11px;font-size:.7rem;font-weight:700;color:var(--muted)}
+/* SECTION SELECTOR */
+.sec-selector{display:flex;gap:10px;flex-wrap:wrap}
+.sec-btn{border:0;border-radius:12px;padding:12px 20px;font-weight:800;font-family:var(--display);font-size:.88rem;cursor:pointer;transition:.18s;border:2px solid transparent;flex:1;min-width:200px}
+.sec-btn.existencia{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--a1)}
+.sec-btn.existencia.active{background:rgba(52,211,153,.2);border-color:var(--a1);box-shadow:0 0 20px rgba(52,211,153,.2)}
+.sec-btn.auxiliar{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.3);color:var(--b1p)}
+.sec-btn.auxiliar.active{background:rgba(167,139,250,.2);border-color:var(--b1p);box-shadow:0 0 20px rgba(167,139,250,.2)}
+.sec-btn:hover{transform:translateY(-2px)}
+/* TABS */
+.tabs-wrap{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.tabs-bar{display:flex;overflow-x:auto;border-bottom:1px solid rgba(255,255,255,.07);scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;border:0;background:transparent;color:var(--muted2);font-family:var(--font);font-size:.78rem;font-weight:700;padding:12px 16px;cursor:pointer;transition:.2s;border-bottom:2.5px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{border-bottom-color:var(--cyan);color:var(--cyan)}
+.level-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.tab-panel{display:none;padding:28px 30px}.tab-panel.visible{display:block}
+/* EXPLANATION BOX */
+.expl-box{background:rgba(255,255,255,.03);border:1.5px solid rgba(37,217,255,.15);border-radius:16px;padding:20px 22px;margin-bottom:22px}
+.expl-title{font-family:var(--display);font-size:1rem;font-weight:900;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.expl-body{font-size:.9rem;color:var(--muted);line-height:1.9}
+.expl-body strong{color:var(--text);font-weight:800}
+.expl-body em{color:var(--cyan);font-style:normal;font-weight:700}
+.struct-box{background:rgba(37,217,255,.06);border:1px solid rgba(37,217,255,.2);border-radius:10px;padding:10px 16px;margin:10px 0;font-family:var(--display);font-size:.95rem;font-weight:800;color:var(--cyan);letter-spacing:.02em}
+.example-list{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.example-item{background:rgba(255,255,255,.03);border-radius:10px;padding:10px 14px;border-left:3px solid}
+.example-item .es{font-weight:700;font-size:.93rem;margin-bottom:3px}
+.example-item .en{font-size:.82rem;color:var(--muted2);font-style:italic}
+.example-item .note{font-size:.75rem;color:var(--muted2);margin-top:4px}
+.warning-box{background:rgba(239,68,68,.07);border:1.5px solid rgba(239,68,68,.25);border-radius:10px;padding:10px 14px;margin-top:12px;font-size:.85rem;line-height:1.7}
+.warning-box strong{color:#fca5a5}
+.contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.contrast-card{border-radius:10px;padding:12px 14px;border:1.5px solid}
+.contrast-card .label{font-size:.65rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+.contrast-card .sent{font-weight:700;font-size:.9rem;margin-bottom:3px}
+.contrast-card .note{font-size:.78rem;color:var(--muted2)}
+/* SUMMARY TABLE */
+.sum-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:10px}
+.sum-table th{text-align:left;padding:7px 12px;font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08)}
+.sum-table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04)}
+.sum-table td:first-child{font-family:var(--display);font-weight:900;color:var(--cyan)}
+.sum-table td:nth-child(2){color:var(--muted)}
+.sum-table td:last-child{color:var(--muted2);font-style:italic}
+.sum-table tr:last-child td{border-bottom:0}
+/* EXERCISES */
+.ex-wrap{display:flex;flex-direction:column;gap:16px}
+.ex-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px}
+.ex-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.ex-title{font-family:var(--display);font-size:.82rem;font-weight:900;color:var(--cyan);text-transform:uppercase;letter-spacing:.05em}
+.score-row{display:flex;align-items:center;gap:8px}
+.score-pill{background:rgba(167,139,250,.15);color:#c4b5fd;border-radius:999px;padding:3px 12px;font-size:.7rem;font-weight:800;border:1px solid rgba(167,139,250,.3)}
+.btn-restart{border:1px solid rgba(249,115,22,.35);border-radius:999px;padding:3px 10px;font-weight:800;font-family:var(--font);font-size:.68rem;cursor:pointer;background:rgba(249,115,22,.08);color:var(--a2);transition:.13s}
+.btn-restart:hover{background:rgba(249,115,22,.18)}
+.wordbank{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 13px;margin-bottom:14px;font-size:.82rem;color:var(--muted2)}
+.wordbank strong{color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+.q-list{display:flex;flex-direction:column;gap:12px}
+.q-item{font-size:.92rem;line-height:1.7}
+.q-num{font-size:.68rem;font-weight:900;color:var(--muted2);margin-right:4px}
+.q-stem{font-weight:600;margin-bottom:5px;line-height:1.65}
+.q-sub{font-size:.8rem;color:var(--muted2);font-style:italic;margin-bottom:6px;border-left:2px solid rgba(37,217,255,.2);padding-left:8px}
+/* CHIPS */
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.chip{border:0;border-radius:9px;padding:7px 14px;font-weight:800;font-family:var(--display);font-size:.88rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.11);color:var(--text)}
+.chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.chip.used{opacity:.18;cursor:not-allowed}
+.chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.blank{display:inline-block;border-bottom:2px solid var(--cyan);min-width:100px;text-align:center;padding:0 4px;color:var(--cyan);font-weight:800;font-family:var(--display)}
+/* INPUT */
+.q-input{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;padding:9px 13px;color:var(--text);font-family:var(--font);font-size:.9rem;outline:none;transition:.2s;width:100%;margin-bottom:4px}
+.q-input:focus{border-color:rgba(37,217,255,.4);background:rgba(37,217,255,.04)}
+.q-input[disabled]{opacity:.65;cursor:default}
+.q-input.inp-ok{border-color:var(--good);background:rgba(34,197,94,.06)}
+.q-input.inp-err{border-color:var(--bad);background:rgba(239,68,68,.05)}
+/* BUTTONS */
+.btn-check{border:0;border-radius:8px;padding:7px 16px;font-weight:800;font-family:var(--font);font-size:.8rem;cursor:pointer;transition:.13s;background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.28);color:var(--cyan);margin-top:6px}
+.btn-check:hover{background:rgba(37,217,255,.2)}
+.btn-check[disabled]{opacity:.4;cursor:default}
+/* FEEDBACK */
+.q-fb{display:none;font-size:.8rem;color:var(--muted);margin-top:6px;padding:7px 11px;border-radius:8px;background:rgba(255,255,255,.04);line-height:1.6}
+.q-fb.show{display:block}
+/* FLASHCARDS */
+.fc-scene{perspective:900px;width:100%;max-width:420px;margin:0 auto 16px;height:180px;cursor:pointer}
+.fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:18px;text-align:center;border:1.5px solid}
+.fc-front{background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.3)}
+.fc-back{transform:rotateY(180deg);background:rgba(37,217,255,.07);border-color:rgba(37,217,255,.3)}
+.fc-label{font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin-bottom:8px}
+.fc-form{font-family:var(--display);font-size:1.8rem;font-weight:900;color:var(--text);margin-bottom:4px}
+.fc-eng{font-size:.9rem;color:var(--muted);font-style:italic}
+.fc-example{font-size:.82rem;color:var(--muted2);margin-top:6px;line-height:1.5}
+.fc-nav{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:14px}
+.fc-counter{font-size:.78rem;font-weight:800;color:var(--muted2)}
+.btn-fc{border:0;border-radius:9px;padding:7px 18px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.12)}
+.btn-fc:hover{background:rgba(255,255,255,.14)}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:4px}
+.creator span{color:var(--magenta2)}
+@media(max-width:560px){.tab-panel{padding:18px 14px}.contrast-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top">
+      <div class="logo-box">YMF</div>
+      <div>
+        <h1>El verbo HABER</h1>
+        <p>Existencia · Tiempos compuestos · Niveles A1–B1+ · Español mexicano neutro</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--a1)">🟢 A1 — Hay</span>
+      <span class="badge" style="border-color:rgba(249,115,22,.4);color:var(--a2)">🟡 A2 — Había/Hubo</span>
+      <span class="badge" style="border-color:rgba(96,165,250,.4);color:var(--b1)">🔵 B1 — Tiempos compuestos</span>
+      <span class="badge" style="border-color:rgba(167,139,250,.4);color:var(--b1p)">🟣 B1+ — Subjuntivo</span>
+      <span class="badge">By Carlos &amp; Denisse</span>
+    </div>
+  </div>
+</header>
+<div class="sec-selector">
+  <button class="sec-btn existencia active" onclick="showSection('existencia')">🌍 HABER de existencia<br><small style="font-weight:600;opacity:.7">hay · había · hubo · habrá · habría · haya · hubiera</small></button>
+  <button class="sec-btn auxiliar" onclick="showSection('auxiliar')">⚙️ HABER auxiliar<br><small style="font-weight:600;opacity:.7">he hablado · había comido · habré vivido · habría ido</small></button>
+</div>
+<div class="tabs-wrap" id="tabsWrap">
+  <div class="tabs-bar" id="tabsBar"></div>
+  <div id="tabContents"></div>
+</div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+<script>
+const SECTIONS={
+existencia:[
+// ── TAB 0: HAY (A1) ──────────────────────────────────────────────────────────
+{level:'A1',color:'var(--a1)',icon:'🟢',title:'HAY',subtitle:'there is / there are',
+expl:{
+  title:'HAY = there is / there are',
+  body:`<strong>Hay</strong> se usa para expresar existencia en el presente.<br>
+  Es <em>impersonal</em>: no cambia con singular ni plural.<br><br>
+  <div class="struct-box">hay + sustantivo</div>
+  <div class="example-list">
+    <div class="example-item" style="border-color:var(--a1)">
+      <div class="es">Hay un restaurante cerca de mi casa.</div>
+      <div class="en">There is a restaurant near my house.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--a1)">
+      <div class="es">Hay muchas personas en el parque.</div>
+      <div class="en">There are many people in the park.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--a1)">
+      <div class="es">No hay suficiente comida.</div>
+      <div class="en">There isn't enough food.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--a1)">
+      <div class="es">¿Hay algún problema?</div>
+      <div class="en">Is there a problem?</div>
+    </div>
+  </div>
+  <div class="warning-box">⚠️ <strong>Importante:</strong> HAY es siempre singular aunque el sustantivo sea plural.<br>
+  ✅ <strong>Hay</strong> muchas personas. &nbsp;❌ <del>Han</del> muchas personas.</div>`,
+},
+flashcards:[
+  {front:'HAY',frontSub:'presente',back:'there is / there are',example:'Hay un libro en la mesa. / There is a book on the table.'},
+  {front:'No hay',frontSub:'negativo',back:"there isn't / there aren't",example:'No hay leche en el refri. / There is no milk in the fridge.'},
+  {front:'¿Hay...?',frontSub:'pregunta',back:'Is there...? / Are there...?',example:'¿Hay algún baño por aquí? / Is there a bathroom nearby?'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa con HAY o NO HAY',
+   wb:['Hay','No hay'],
+   qs:[
+     {stem:'___ un supermercado cerca de aquí.',sub:'There is a supermarket near here.',a:'Hay'},
+     {stem:'___ suficiente tiempo para terminar.',sub:"There isn't enough time to finish.",a:'No hay'},
+     {stem:'___ tres recámaras en la casa.',sub:'There are three bedrooms in the house.',a:'Hay'},
+     {stem:'___ clases el domingo.',sub:"There aren't classes on Sunday.",a:'No hay'},
+     {stem:'___ mucho tráfico en las mañanas.',sub:'There is a lot of traffic in the mornings.',a:'Hay'},
+     {stem:'___ ningún problema con el pedido.',sub:"There isn't any problem with the order.",a:'No hay'},
+   ]},
+  {type:'translate',title:'B. Traduce al español (ES)',
+   qs:[
+     {stem:'There is a pharmacy near my house.',a:'Hay una farmacia cerca de mi casa.'},
+     {stem:'There are many students in the class.',a:'Hay muchos estudiantes en la clase.'},
+     {stem:"There isn't enough food for everyone.",a:'No hay suficiente comida para todos.'},
+     {stem:'Is there a problem with the reservation?',a:'¿Hay algún problema con la reservación?'},
+     {stem:'There are two restaurants on this street.',a:'Hay dos restaurantes en esta calle.'},
+   ]},
+  {type:'translate',title:'C. Traduce al inglés (EN)',
+   qs:[
+     {stem:'Hay una tienda en la esquina.',a:'There is a store on the corner.'},
+     {stem:'¿Hay algún hospital cerca?',a:'Is there a hospital nearby?'},
+     {stem:'No hay luz en el cuarto.',a:"There is no light in the room. / There isn't any light in the room."},
+     {stem:'Hay veinte personas esperando.',a:'There are twenty people waiting.'},
+   ]},
+]},
+
+// ── TAB 1: HABÍA & HUBO (A2) ─────────────────────────────────────────────────
+{level:'A2',color:'var(--a2)',icon:'🟡',title:'HABÍA & HUBO',subtitle:'there was / there were',
+expl:{
+  title:'HABÍA vs HUBO — ¡diferencia importante!',
+  body:`Ambas equivalen a <em>there was / there were</em>, pero se usan de forma diferente.<br><br>
+  <div class="contrast-grid">
+    <div class="contrast-card" style="border-color:rgba(249,115,22,.4);background:rgba(249,115,22,.06)">
+      <div class="label" style="color:var(--a2)">HABÍA = descripción</div>
+      <div class="sent">Había mucha gente en la calle.</div>
+      <div class="note">→ Describe cómo era la situación.</div>
+    </div>
+    <div class="contrast-card" style="border-color:rgba(96,165,250,.4);background:rgba(96,165,250,.06)">
+      <div class="label" style="color:var(--b1)">HUBO = evento</div>
+      <div class="sent">Hubo una manifestación en la calle.</div>
+      <div class="note">→ Habla de un acontecimiento específico.</div>
+    </div>
+  </div>
+  <div class="example-list" style="margin-top:14px">
+    <div class="example-item" style="border-color:var(--a2)">
+      <div class="es">Cuando era niño, había menos tráfico.</div>
+      <div class="en">When I was a child, there was less traffic.</div>
+      <div class="note">→ Descripción de una situación pasada habitual.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">Ayer hubo un accidente en la carretera.</div>
+      <div class="en">There was an accident on the highway yesterday.</div>
+      <div class="note">→ Evento específico y terminado.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--a2)">
+      <div class="es">Antes había una cafetería aquí.</div>
+      <div class="en">There used to be a café here.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">La semana pasada hubo una reunión importante.</div>
+      <div class="en">There was an important meeting last week.</div>
+    </div>
+  </div>
+  <div class="warning-box">⚠️ Igual que HAY, son <strong>impersonales</strong>:<br>
+  ✅ <strong>Había</strong> muchos problemas. &nbsp;❌ <del>Habían</del> muchos problemas.</div>`,
+},
+flashcards:[
+  {front:'HABÍA',frontSub:'descripción pasada',back:'there was / there were (description)',example:'Había mucha gente en la fiesta. / There were many people at the party.'},
+  {front:'HUBO',frontSub:'evento pasado',back:'there was / there were (event)',example:'Anoche hubo una tormenta. / There was a storm last night.'},
+  {front:'Antes había...',frontSub:'situación habitual',back:'there used to be...',example:'Antes había un parque aquí. / There used to be a park here.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿HABÍA o HUBO?',
+   wb:['Había','Hubo'],
+   qs:[
+     {stem:'___ muchas personas en la fiesta.',sub:'There were many people at the party. (description)',a:'Había'},
+     {stem:'Ayer ___ un accidente terrible.',sub:'There was a terrible accident yesterday. (event)',a:'hubo'},
+     {stem:'Cuando era pequeña, ___ un lago cerca de mi casa.',sub:'When I was little, there was a lake near my house.',a:'había'},
+     {stem:'La semana pasada ___ una reunión urgente.',sub:'There was an urgent meeting last week. (event)',a:'hubo'},
+     {stem:'Antes ___ menos contaminación en la ciudad.',sub:'There used to be less pollution in the city.',a:'había'},
+     {stem:'Anoche ___ una tormenta muy fuerte.',sub:'There was a very strong storm last night. (event)',a:'hubo'},
+   ]},
+  {type:'translate',title:'B. Traduce al español',
+   qs:[
+     {stem:'There were many people at the hotel.',a:'Había muchas personas en el hotel.'},
+     {stem:'There was an accident yesterday.',a:'Ayer hubo un accidente.'},
+     {stem:'When I was a child, there were fewer cars.',a:'Cuando era niño/a, había menos coches / carros.'},
+     {stem:'There was an important meeting last week.',a:'La semana pasada hubo una reunión importante.'},
+     {stem:'There used to be a park in this neighborhood.',a:'Antes había un parque en este vecindario / colonia.'},
+   ]},
+  {type:'error',title:'C. Corrige el error (si lo hay)',
+   qs:[
+     {stem:'Habían muchos estudiantes en la clase.',a:'Había muchos estudiantes en la clase.',fb:'HABÍA es impersonal — no concuerda con el sustantivo. Siempre singular.'},
+     {stem:'Ayer hubo muchos problemas con el sistema.',a:'La oración es correcta.',fb:'Correcto. HUBO para evento pasado + plural (el verbo no cambia).'},
+     {stem:'Antes había una panadería en esa esquina.',a:'La oración es correcta.',fb:'Correcto. HABÍA para situación pasada habitual.'},
+     {stem:'Hubieron varios accidentes la semana pasada.',a:'Hubo varios accidentes la semana pasada.',fb:'HUBO es impersonal — no cambia a HUBIERON. Siempre singular.'},
+   ]},
+]},
+
+// ── TAB 2: HABRÁ & HABRÍA (B1) ───────────────────────────────────────────────
+{level:'B1',color:'var(--b1)',icon:'🔵',title:'HABRÁ & HABRÍA',subtitle:'there will be / there would be',
+expl:{
+  title:'HABRÁ y HABRÍA — futuro e hipotético',
+  body:`<strong>HABRÁ</strong> = existencia futura — <em>there will be</em><br>
+  <strong>HABRÍA</strong> = existencia hipotética — <em>there would be</em><br><br>
+  <div class="example-list">
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">Mañana habrá una reunión importante.</div>
+      <div class="en">There will be an important meeting tomorrow.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">En el futuro habrá más coches eléctricos.</div>
+      <div class="en">There will be more electric cars in the future.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">No habrá clases el viernes.</div>
+      <div class="en">There won't be classes on Friday.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Habría menos tráfico si más personas usaran el metro.</div>
+      <div class="en">There would be less traffic if more people used the subway.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Con más dinero, habría más posibilidades.</div>
+      <div class="en">With more money, there would be more possibilities.</div>
+    </div>
+  </div>`,
+},
+flashcards:[
+  {front:'HABRÁ',frontSub:'futuro',back:'there will be',example:'Mañana habrá más información. / There will be more information tomorrow.'},
+  {front:'No habrá',frontSub:'futuro negativo',back:"there won't be",example:'No habrá clases el lunes. / There won\'t be classes on Monday.'},
+  {front:'HABRÍA',frontSub:'hipotético',back:'there would be',example:'Habría menos problemas con mejor comunicación. / There would be fewer problems with better communication.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿HABRÁ o HABRÍA?',
+   wb:['Habrá','Habría','No habrá'],
+   qs:[
+     {stem:'___ una conferencia el próximo mes.',sub:'There will be a conference next month.',a:'Habrá'},
+     {stem:'___ clases el día feriado.',sub:"There won't be classes on the holiday.",a:'No habrá'},
+     {stem:'___ menos contaminación si usáramos más transporte público.',sub:'There would be less pollution if we used more public transport.',a:'Habría'},
+     {stem:'___ muchos cambios en los próximos años.',sub:'There will be many changes in the coming years.',a:'Habrá'},
+     {stem:'___ más oportunidades si estudiaras otro idioma.',sub:'There would be more opportunities if you studied another language.',a:'Habría'},
+   ]},
+  {type:'translate',title:'B. Traduce al español',
+   qs:[
+     {stem:'There will be a meeting tomorrow.',a:'Mañana habrá una reunión.'},
+     {stem:"There won't be classes on Friday.",a:'No habrá clases el viernes.'},
+     {stem:'There will be more electric cars in the future.',a:'En el futuro habrá más coches / carros eléctricos.'},
+     {stem:'There would be less traffic if more people used the subway.',a:'Habría menos tráfico si más personas usaran el metro.'},
+     {stem:'There would be more students if the course were cheaper.',a:'Habría más estudiantes si el curso fuera más barato.'},
+   ]},
+  {type:'translate',title:'C. Traduce al inglés',
+   qs:[
+     {stem:'Mañana habrá más información disponible.',a:'There will be more information available tomorrow.'},
+     {stem:'Habría menos problemas con una mejor organización.',a:'There would be fewer problems with better organization.'},
+     {stem:'No habrá tiempo suficiente si no empezamos ya.',a:"There won't be enough time if we don't start now."},
+   ]},
+]},
+
+// ── TAB 3: HAYA & HUBIERA (B1+) ──────────────────────────────────────────────
+{level:'B1+',color:'var(--b1p)',icon:'🟣',title:'HAYA & HUBIERA',subtitle:'subjuntivo de existencia',
+expl:{
+  title:'HAYA y HUBIERA — existencia en subjuntivo',
+  body:`Se usan cuando <strong>haber de existencia</strong> aparece después de expresiones de <em>duda, posibilidad, deseo, emoción o búsqueda</em>.<br><br>
+  <div class="struct-box">expresión + que + haya / hubiera</div>
+  <div class="example-list">
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Es posible que haya problemas mañana.</div>
+      <div class="en">It's possible that there will be problems tomorrow.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">No creo que haya suficiente comida.</div>
+      <div class="en">I don't think there is enough food.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Busco un hotel donde haya piscina.</div>
+      <div class="en">I'm looking for a hotel where there is a swimming pool.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Me gustaría que hubiera más parques en la ciudad.</div>
+      <div class="en">I would like there to be more parks in the city.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Si hubiera más oportunidades, menos personas se irían.</div>
+      <div class="en">If there were more opportunities, fewer people would leave.</div>
+    </div>
+  </div>`,
+},
+flashcards:[
+  {front:'HAYA',frontSub:'subj. presente',back:'there is / there may be',example:'Es posible que haya un error. / It\'s possible there is an error.'},
+  {front:'HUBIERA',frontSub:'subj. pasado/hipotético',back:'there were (hypothetical)',example:'Si hubiera menos tráfico, llegaría más rápido. / If there were less traffic, I would arrive faster.'},
+  {front:'...que haya...',frontSub:'después de duda/emoción',back:'...that there is...',example:'No creo que haya suficiente tiempo. / I don\'t think there is enough time.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿HAYA o HUBIERA?',
+   wb:['haya','hubiera'],
+   qs:[
+     {stem:'Es posible que ___ un problema con el sistema.',sub:"It's possible there is a problem with the system.",a:'haya'},
+     {stem:'Me gustaría que ___ más transporte público.',sub:'I would like there to be more public transport.',a:'hubiera'},
+     {stem:'No creo que ___ suficiente espacio para todos.',sub:"I don't think there is enough space for everyone.",a:'haya'},
+     {stem:'Si ___ más tiempo, haríamos más ejercicio.',sub:'If there were more time, we would exercise more.',a:'hubiera'},
+     {stem:'Busco un trabajo donde ___ oportunidades de crecer.',sub:'I\'m looking for a job where there are opportunities to grow.',a:'haya'},
+     {stem:'Me sorprende que no ___ más personas aquí.',sub:"I'm surprised there aren't more people here.",a:'haya'},
+   ]},
+  {type:'translate',title:'B. Traduce al español',
+   qs:[
+     {stem:"It's possible that there will be problems tomorrow.",a:'Es posible que haya problemas mañana.'},
+     {stem:"I don't think there is enough food.",a:'No creo que haya suficiente comida.'},
+     {stem:"I'm looking for a hotel where there is a pool.",a:'Busco un hotel donde haya piscina / alberca.'},
+     {stem:'I would like there to be more parks in the city.',a:'Me gustaría que hubiera más parques en la ciudad.'},
+     {stem:'If there were more job opportunities, fewer people would leave.',a:'Si hubiera más oportunidades de trabajo, menos personas se irían.'},
+   ]},
+]},
+],
+
+auxiliar:[
+// ── TAB 0: PRETÉRITO PERFECTO (A2) ───────────────────────────────────────────
+{level:'A2',color:'var(--a2)',icon:'🟡',title:'Pretérito perfecto',subtitle:'he / has / ha + participio',
+expl:{
+  title:'Pretérito perfecto — I have done',
+  body:`<div class="struct-box">he / has / ha / hemos / han + participio</div>
+  Se usa para hablar de <em>experiencias</em>, <em>acciones recientes</em> y <em>acciones pasadas con relevancia presente</em>.<br><br>
+  <strong>Participios regulares:</strong><br>
+  hablar → <em>hablado</em> &nbsp;·&nbsp; comer → <em>comido</em> &nbsp;·&nbsp; vivir → <em>vivido</em><br><br>
+  <strong>Participios irregulares:</strong><br>
+  hacer → <em>hecho</em> &nbsp;·&nbsp; ver → <em>visto</em> &nbsp;·&nbsp; escribir → <em>escrito</em> &nbsp;·&nbsp; decir → <em>dicho</em> &nbsp;·&nbsp; poner → <em>puesto</em> &nbsp;·&nbsp; abrir → <em>abierto</em> &nbsp;·&nbsp; volver → <em>vuelto</em><br><br>
+  <div class="example-list">
+    <div class="example-item" style="border-color:var(--a2)">
+      <div class="es">He visitado México varias veces.</div><div class="en">I have visited Mexico several times.</div><div class="note">→ Experiencia</div>
+    </div>
+    <div class="example-item" style="border-color:var(--a2)">
+      <div class="es">¿Has probado comida mexicana?</div><div class="en">Have you tried Mexican food?</div><div class="note">→ Pregunta sobre experiencia</div>
+    </div>
+    <div class="example-item" style="border-color:var(--a2)">
+      <div class="es">Nunca hemos viajado a Argentina.</div><div class="en">We have never traveled to Argentina.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--a2)">
+      <div class="es">María ha terminado su proyecto.</div><div class="en">María has finished her project.</div>
+    </div>
+  </div>`,
+},
+flashcards:[
+  {front:'he hablado',frontSub:'yo — pretérito perfecto',back:'I have spoken',example:'He hablado con ella hoy. / I have spoken with her today.'},
+  {front:'has comido',frontSub:'tú — pretérito perfecto',back:'you have eaten',example:'¿Has comido algo? / Have you eaten anything?'},
+  {front:'ha vivido',frontSub:'él/ella — pretérito perfecto',back:'he/she has lived',example:'Ella ha vivido aquí diez años. / She has lived here ten years.'},
+  {front:'hemos visto',frontSub:'nosotros — pretérito perfecto',back:'we have seen',example:'Hemos visto esa película. / We have seen that movie.'},
+  {front:'han dicho',frontSub:'ellos — pretérito perfecto',back:'they have said',example:'No han dicho nada todavía. / They haven\'t said anything yet.'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa con la forma correcta del pretérito perfecto',
+   wb:['he visitado','has probado','ha terminado','hemos aprendido','han llegado','he visto','ha hecho','hemos vivido'],
+   qs:[
+     {stem:'___ México dos veces. (yo)',sub:'I have visited Mexico twice.',a:'he visitado'},
+     {stem:'¿___ comida picante alguna vez? (tú)',sub:'Have you ever tried spicy food?',a:'has probado'},
+     {stem:'María ___ su proyecto. (ella)',sub:'María has finished her project.',a:'ha terminado'},
+     {stem:'___ mucho este año. (nosotros)',sub:'We have learned a lot this year.',a:'hemos aprendido'},
+     {stem:'Los invitados ya ___. (ellos)',sub:'The guests have already arrived.',a:'han llegado'},
+     {stem:'Nunca ___ esa película. (yo)',sub:"I have never seen that movie.",a:'he visto'},
+   ]},
+  {type:'translate',title:'B. Traduce al español',
+   qs:[
+     {stem:'I have visited Mexico several times.',a:'He visitado México varias veces.'},
+     {stem:'Have you ever tried Mexican food?',a:'¿Has probado comida mexicana alguna vez?'},
+     {stem:'We have learned a lot this year.',a:'Hemos aprendido mucho este año.'},
+     {stem:'I have never seen that movie.',a:'Nunca he visto esa película.'},
+     {stem:'She has already finished her homework.',a:'Ella ya ha terminado su tarea.'},
+   ]},
+  {type:'translate',title:'C. Traduce al inglés',
+   qs:[
+     {stem:'He trabajado mucho esta semana.',a:'I have worked a lot this week.'},
+     {stem:'Nunca hemos visitado ese lugar.',a:'We have never visited that place.'},
+     {stem:'¿Has hablado con tu jefe?',a:'Have you spoken with your boss?'},
+     {stem:'Ellos han dicho la verdad.',a:'They have told the truth.'},
+   ]},
+]},
+
+// ── TAB 1: PLUSCUAMPERFECTO (B1) ─────────────────────────────────────────────
+{level:'B1',color:'var(--b1)',icon:'🔵',title:'Pluscuamperfecto',subtitle:'había / habías / había + participio',
+expl:{
+  title:'Pluscuamperfecto — I had done',
+  body:`<div class="struct-box">había / habías / había / habíamos / habían + participio</div>
+  Se usa para una acción que ocurrió <em>antes de otra acción pasada</em>.<br><br>
+  <div class="example-item" style="border-color:var(--b1);border-radius:10px;padding:12px 14px;background:rgba(96,165,250,.05);margin:12px 0">
+    <div class="es">Cuando llegué a la estación, el tren ya <strong>había salido</strong>.</div>
+    <div class="en">When I arrived at the station, the train had already left.</div>
+    <div class="note">→ Primero: el tren salió. Después: yo llegué.</div>
+  </div>
+  <div class="example-list">
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">Ella nunca había viajado sola antes de ese viaje.</div><div class="en">She had never traveled alone before that trip.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">Ya habíamos comido cuando llegaron nuestros amigos.</div><div class="en">We had already eaten when our friends arrived.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">No pude entrar porque había olvidado mis llaves.</div><div class="en">I couldn't get in because I had forgotten my keys.</div>
+    </div>
+  </div>`,
+},
+flashcards:[
+  {front:'había hablado',frontSub:'yo/él/ella',back:'I/he/she had spoken',example:'Ella ya había hablado con él. / She had already spoken with him.'},
+  {front:'habías comido',frontSub:'tú',back:'you had eaten',example:'No sabía que ya habías comido. / I didn\'t know you had already eaten.'},
+  {front:'habíamos vivido',frontSub:'nosotros',back:'we had lived',example:'Habíamos vivido allí diez años. / We had lived there for ten years.'},
+  {front:'habían salido',frontSub:'ellos/ellas',back:'they had left',example:'Ya habían salido cuando llegué. / They had already left when I arrived.'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa con el pluscuamperfecto',
+   wb:['había salido','habías comido','habíamos llegado','habían terminado','había olvidado','había visto'],
+   qs:[
+     {stem:'Cuando llegué, el tren ya ___ .',sub:'When I arrived, the train had already left.',a:'había salido'},
+     {stem:'No sabía que tú ya ___ .',sub:"I didn't know you had already eaten.",a:'habías comido'},
+     {stem:'___ antes de que empezara la reunión.',sub:'We had arrived before the meeting started.',a:'habíamos llegado'},
+     {stem:'Ellos ya ___ cuando los llamé.',sub:'They had already finished when I called them.',a:'habían terminado'},
+     {stem:'No pude entrar porque ___ mis llaves.',sub:"I couldn't get in because I had forgotten my keys.",a:'había olvidado'},
+   ]},
+  {type:'translate',title:'B. Traduce al español',
+   qs:[
+     {stem:'When I arrived, they had already eaten.',a:'Cuando llegué, ya habían comido.'},
+     {stem:'She had never traveled alone before that trip.',a:'Ella nunca había viajado sola antes de ese viaje.'},
+     {stem:"I couldn't enter because I had forgotten my keys.",a:'No pude entrar porque había olvidado mis llaves.'},
+     {stem:'They had already left when we arrived.',a:'Ya habían salido cuando llegamos.'},
+     {stem:'I had never seen such a big city.',a:'Nunca había visto una ciudad tan grande.'},
+   ]},
+  {type:'translate',title:'C. Traduce al inglés',
+   qs:[
+     {stem:'Cuando llegué, María ya había salido.',a:'When I arrived, María had already left.'},
+     {stem:'Ellos habían terminado antes de las seis.',a:'They had finished before six.'},
+     {stem:'Nunca había visto una película tan triste.',a:'I had never seen such a sad movie.'},
+   ]},
+]},
+
+// ── TAB 2: FUTURO PERFECTO (B1) ──────────────────────────────────────────────
+{level:'B1',color:'var(--b1)',icon:'🔵',title:'Futuro perfecto',subtitle:'habré / habrás / habrá + participio',
+expl:{
+  title:'Futuro perfecto — I will have done',
+  body:`<div class="struct-box">habré / habrás / habrá / habremos / habrán + participio</div>
+  Se usa para una acción que estará terminada <em>antes de un momento futuro</em>.<br><br>
+  <div class="example-list">
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">Para el próximo año, <strong>habré terminado</strong> la universidad.</div>
+      <div class="en">By next year, I will have finished university.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">Para las ocho, ella <strong>habrá llegado</strong> a casa.</div>
+      <div class="en">By eight o'clock, she will have arrived home.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">Para el viernes, ellos <strong>habrán terminado</strong> el proyecto.</div>
+      <div class="en">By Friday, they will have finished the project.</div>
+    </div>
+  </div>
+  <div class="warning-box">💡 Clave: busca <strong>"para + tiempo"</strong> — casi siempre señala futuro perfecto.</div>`,
+},
+flashcards:[
+  {front:'habré terminado',frontSub:'yo — futuro perfecto',back:'I will have finished',example:'Para mayo, habré terminado el curso. / By May, I will have finished the course.'},
+  {front:'habrá llegado',frontSub:'él/ella — futuro perfecto',back:'he/she will have arrived',example:'Para las cinco, ella habrá llegado. / By five, she will have arrived.'},
+  {front:'habremos ahorrado',frontSub:'nosotros — futuro perfecto',back:'we will have saved',example:'Para diciembre, habremos ahorrado suficiente. / By December, we will have saved enough.'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa con el futuro perfecto',
+   wb:['habré terminado','habrá llegado','habremos ahorrado','habrán construido','habrás aprendido'],
+   qs:[
+     {stem:'Para el próximo año, ___ la universidad. (yo)',sub:'By next year, I will have finished university.',a:'habré terminado'},
+     {stem:'Para las ocho, ella ___ a casa.',sub:'By eight, she will have arrived home.',a:'habrá llegado'},
+     {stem:'Para diciembre, ___ suficiente dinero. (nosotros)',sub:'By December, we will have saved enough money.',a:'habremos ahorrado'},
+     {stem:'Para el próximo mes, ___ el nuevo edificio. (ellos)',sub:'By next month, they will have built the new building.',a:'habrán construido'},
+   ]},
+  {type:'translate',title:'B. Traduce al español',
+   qs:[
+     {stem:'By next year, I will have finished university.',a:'Para el próximo año, habré terminado la universidad.'},
+     {stem:'By eight o\'clock, she will have arrived home.',a:'Para las ocho, ella habrá llegado a casa.'},
+     {stem:'By Friday, they will have finished the project.',a:'Para el viernes, ellos habrán terminado el proyecto.'},
+     {stem:'By next month, we will have saved enough money.',a:'Para el próximo mes, habremos ahorrado suficiente dinero.'},
+   ]},
+]},
+
+// ── TAB 3: CONDICIONAL PERFECTO (B1) ─────────────────────────────────────────
+{level:'B1',color:'var(--b1)',icon:'🔵',title:'Condicional perfecto',subtitle:'habría / habrías + participio',
+expl:{
+  title:'Condicional perfecto — I would have done',
+  body:`<div class="struct-box">habría / habrías / habría / habríamos / habrían + participio</div>
+  Se usa para algo que <em>podría haber ocurrido en el pasado pero no ocurrió</em>.<br>
+  Casi siempre aparece con <em>si + hubiera/hubiese</em>.<br><br>
+  <div class="example-list">
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es"><strong>Habría comprado</strong> la casa si <strong>hubiera tenido</strong> suficiente dinero.</div>
+      <div class="en">I would have bought the house if I had had enough money.</div>
+      <div class="note">→ No tenía dinero → No compré la casa.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es">Ella <strong>habría venido</strong>, pero estaba enferma.</div>
+      <div class="en">She would have come, but she was sick.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1)">
+      <div class="es"><strong>Habríamos viajado</strong> más si hubiéramos tenido tiempo.</div>
+      <div class="en">We would have traveled more if we had had time.</div>
+    </div>
+  </div>`,
+},
+flashcards:[
+  {front:'habría ido',frontSub:'yo — condicional perfecto',back:'I would have gone',example:'Habría ido contigo si hubiera tenido tiempo. / I would have gone with you if I had had time.'},
+  {front:'habrías dicho',frontSub:'tú — condicional perfecto',back:'you would have said',example:'¿Qué habrías dicho tú? / What would you have said?'},
+  {front:'habríamos hecho',frontSub:'nosotros',back:'we would have done',example:'Habríamos hecho más si hubiéramos sabido. / We would have done more if we had known.'},
+],
+exercises:[
+  {type:'translate',title:'A. Traduce al español',
+   qs:[
+     {stem:'I would have accepted the job if the salary had been better.',a:'Habría aceptado el trabajo si el salario hubiera sido mejor.'},
+     {stem:'We would have traveled more if we had had enough money.',a:'Habríamos viajado más si hubiéramos tenido suficiente dinero.'},
+     {stem:'She would have bought the house if it had been cheaper.',a:'Ella habría comprado la casa si hubiera sido más barata.'},
+     {stem:'I would have gone with you if I had had time.',a:'Habría ido contigo si hubiera tenido tiempo.'},
+   ]},
+  {type:'translate',title:'B. Traduce al inglés',
+   qs:[
+     {stem:'Habría ido contigo si hubiera tenido tiempo.',a:'I would have gone with you if I had had time.'},
+     {stem:'Si hubiéramos sabido la verdad, habríamos actuado diferente.',a:'If we had known the truth, we would have acted differently.'},
+     {stem:'Ella habría venido, pero estaba enferma.',a:'She would have come, but she was sick.'},
+   ]},
+]},
+
+// ── TAB 4: SUBJUNTIVO COMPUESTO (B1+) ────────────────────────────────────────
+{level:'B1+',color:'var(--b1p)',icon:'🟣',title:'Subjuntivo compuesto',subtitle:'haya / hubiera + participio',
+expl:{
+  title:'Subjuntivo compuesto — haya/hubiera hablado',
+  body:`<div class="contrast-grid">
+    <div class="contrast-card" style="border-color:rgba(167,139,250,.4);background:rgba(167,139,250,.06)">
+      <div class="label" style="color:var(--b1p)">HAYA + participio</div>
+      <div class="sent">perfecto de subjuntivo</div>
+      <div class="note">→ duda/emoción sobre algo reciente</div>
+    </div>
+    <div class="contrast-card" style="border-color:rgba(167,139,250,.4);background:rgba(167,139,250,.06)">
+      <div class="label" style="color:var(--b1p)">HUBIERA + participio</div>
+      <div class="sent">pluscuamperfecto de subjuntivo</div>
+      <div class="note">→ hipótesis sobre el pasado</div>
+    </div>
+  </div>
+  <div class="example-list" style="margin-top:14px">
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Me alegra que <strong>hayas venido</strong>.</div><div class="en">I'm glad that you have come.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Es posible que ella <strong>haya olvidado</strong> la reunión.</div><div class="en">It's possible that she has forgotten the meeting.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">No creo que ellos <strong>hayan terminado</strong> todavía.</div><div class="en">I don't think they have finished yet.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Si <strong>hubiera estudiado</strong> más, habría aprobado el examen.</div><div class="en">If I had studied more, I would have passed the exam.</div>
+    </div>
+    <div class="example-item" style="border-color:var(--b1p)">
+      <div class="es">Si ellos <strong>hubieran salido</strong> antes, no habrían perdido el vuelo.</div><div class="en">If they had left earlier, they wouldn't have missed the flight.</div>
+    </div>
+  </div>`,
+},
+flashcards:[
+  {front:'haya hablado',frontSub:'perfecto de subj.',back:'have spoken (subj.)',example:'Me alegra que haya hablado. / I\'m glad he/she has spoken.'},
+  {front:'hayas venido',frontSub:'perfecto de subj. — tú',back:'you have come (subj.)',example:'Es bueno que hayas venido. / It\'s good that you have come.'},
+  {front:'hubiera sabido',frontSub:'pluscuaamp. de subj.',back:'had known (subj.)',example:'Si hubiera sabido, habría actuado diferente. / If I had known, I would have acted differently.'},
+  {front:'hubieran llegado',frontSub:'pluscuamp. de subj.',back:'they had arrived (subj.)',example:'Si hubieran llegado antes... / If they had arrived earlier...'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿HAYA o HUBIERA + participio?',
+   wb:['haya terminado','hubiera sabido','hayas venido','hubieran salido','haya olvidado','hubiéramos tenido'],
+   qs:[
+     {stem:'Me alegra que ___ a la fiesta. (tú)',sub:"I'm glad that you have come to the party.",a:'hayas venido'},
+     {stem:'Es posible que ella ___ la reunión.',sub:"It's possible that she has forgotten the meeting.",a:'haya olvidado'},
+     {stem:'Si ___ la verdad, habría actuado diferente.',sub:'If I had known the truth, I would have acted differently.',a:'hubiera sabido'},
+     {stem:'No creo que ellos ___ todavía.',sub:"I don't think they have finished yet.",a:'haya terminado'},
+     {stem:'Si ___ antes, no habrían perdido el vuelo.',sub:"If they had left earlier, they wouldn't have missed the flight.",a:'hubieran salido'},
+   ]},
+  {type:'translate',title:'B. Traduce al español',
+   qs:[
+     {stem:"I'm glad that you have come to the party.",a:'Me alegra que hayas venido a la fiesta.'},
+     {stem:"It's possible that she has forgotten the meeting.",a:'Es posible que ella haya olvidado la reunión.'},
+     {stem:"I don't think they have finished yet.",a:'No creo que ellos hayan terminado todavía.'},
+     {stem:'If I had studied more, I would have passed the exam.',a:'Si hubiera estudiado más, habría aprobado el examen.'},
+     {stem:"If they had left earlier, they wouldn't have missed the flight.",a:'Si hubieran salido antes, no habrían perdido el vuelo.'},
+   ]},
+  {type:'translate',title:'C. Traduce al inglés',
+   qs:[
+     {stem:'Espero que ustedes hayan disfrutado el viaje.',a:'I hope you have enjoyed the trip.'},
+     {stem:'No creo que ella haya dicho eso.',a:"I don't think she has said that."},
+     {stem:'Si hubiéramos sabido la verdad, habríamos actuado diferente.',a:'If we had known the truth, we would have acted differently.'},
+   ]},
+]},
+
+// ── TAB 5: MEZCLA FINAL B1 ───────────────────────────────────────────────────
+{level:'B1',color:'var(--b1)',icon:'🔥',title:'Mezcla final',subtitle:'todos los usos de HABER',
+expl:{
+  title:'Repaso — todos los usos de HABER',
+  body:`<table class="sum-table">
+  <thead><tr><th>Forma</th><th>Uso</th><th>Inglés</th></tr></thead>
+  <tbody>
+    <tr><td>hay</td><td>existencia presente</td><td>there is / there are</td></tr>
+    <tr><td>había</td><td>existencia pasada / descripción</td><td>there was / there were</td></tr>
+    <tr><td>hubo</td><td>evento pasado</td><td>there was / there were</td></tr>
+    <tr><td>habrá</td><td>existencia futura</td><td>there will be</td></tr>
+    <tr><td>habría</td><td>existencia hipotética</td><td>there would be</td></tr>
+    <tr><td>haya</td><td>existencia en subjuntivo</td><td>there is / there may be</td></tr>
+    <tr><td>hubiera</td><td>existencia hipotética subj.</td><td>if there were</td></tr>
+    <tr><td>he / has hablado</td><td>pretérito perfecto</td><td>I have spoken</td></tr>
+    <tr><td>había hablado</td><td>pluscuamperfecto</td><td>I had spoken</td></tr>
+    <tr><td>habré hablado</td><td>futuro perfecto</td><td>I will have spoken</td></tr>
+    <tr><td>habría hablado</td><td>condicional perfecto</td><td>I would have spoken</td></tr>
+    <tr><td>haya hablado</td><td>perfecto de subjuntivo</td><td>have spoken (subj.)</td></tr>
+    <tr><td>hubiera hablado</td><td>pluscuamp. de subjuntivo</td><td>had spoken (subj.)</td></tr>
+  </tbody></table>`,
+},
+flashcards:[],
+exercises:[
+  {type:'translate',title:'A. Mezcla — Traduce al español',
+   qs:[
+     {stem:'There were many people at the station, but the train had already left.',a:'Había muchas personas en la estación, pero el tren ya había salido.'},
+     {stem:'There will be more jobs after the company has expanded.',a:'Habrá más empleos después de que la empresa se haya expandido.'},
+     {stem:'There would be fewer problems if they had prepared everything earlier.',a:'Habría menos problemas si hubieran preparado todo antes.'},
+     {stem:"I don't think there is a problem, but someone may have made a mistake.",a:'No creo que haya un problema, pero alguien puede haber cometido un error.'},
+     {stem:'If there had been more time, we would have finished the project.',a:'Si hubiera habido más tiempo, habríamos terminado el proyecto.'},
+     {stem:'There was a meeting yesterday because there had been several problems.',a:'Ayer hubo una reunión porque había habido varios problemas.'},
+     {stem:'I hope there are enough seats because many people have confirmed.',a:'Espero que haya suficientes lugares porque mucha gente ha confirmado.'},
+     {stem:'When we arrived, there were no rooms because tourists had already made reservations.',a:'Cuando llegamos, no había cuartos porque los turistas ya habían hecho reservaciones.'},
+   ]},
+  {type:'translate',title:'B. Mezcla — Traduce al inglés',
+   qs:[
+     {stem:'Había muchas cosas que podíamos hacer, pero ya habíamos perdido el tiempo.',a:'There were many things we could do, but we had already wasted the time.'},
+     {stem:'Es posible que haya un error en el documento.',a:"It's possible there is an error in the document."},
+     {stem:'Para el próximo año, habremos terminado la construcción.',a:'By next year, we will have finished the construction.'},
+     {stem:'Si hubiera más transporte público, habría menos tráfico.',a:'If there were more public transportation, there would be less traffic.'},
+     {stem:'Me alegra que hayas podido venir, no creía que hubiera suficiente espacio.',a:"I'm glad you were able to come — I didn't think there would be enough space."},
+   ]},
+]},
+]};
+</script>
+<script>
+let currentSection='existencia';
+const renderedTabs={existencia:new Set(),auxiliar:new Set()};
+const answers={};
+
+function normalize(s){
+  return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[¿?¡!.,;:]/g,'').replace(/\s+/g,' ');
+}
+function checkAns(user,correct){
+  const u=normalize(user);
+  const alts=correct.split('/').map(a=>normalize(a));
+  if(alts.some(a=>u===a||u.includes(a)||a.includes(u)))return true;
+  const uClean=u.replace(/^(yo|tu|el|ella|usted|nosotros|nosotras|ellos|ellas|ustedes)\s+/,'')
+               .replace(/por\s*/g,'')
+               .replace(/\s+/g,' ').trim();
+  return alts.some(a=>{
+    const aC=a.replace(/^(yo|tu|el|ella|usted|nosotros|nosotras|ellos|ellas|ustedes)\s+/,'')
+              .replace(/por\s*/g,'')
+              .replace(/\s+/g,' ').trim();
+    return uClean===aC||uClean.includes(aC)||aC.includes(uClean);
+  });
+}
+
+function showSection(sec){
+  currentSection=sec;
+  document.querySelectorAll('.sec-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.sec-btn.'+sec).classList.add('active');
+  buildTabsBar();
+  const firstTab=document.getElementById('tabsBar').querySelector('.tab-btn');
+  if(firstTab)firstTab.click();
+}
+
+function buildTabsBar(){
+  const bar=document.getElementById('tabsBar');
+  bar.innerHTML='';
+  document.getElementById('tabContents').innerHTML='';
+  renderedTabs[currentSection]=new Set();
+  const tabs=SECTIONS[currentSection];
+  const lvlColors={'A1':'var(--a1)','A2':'var(--a2)','B1':'var(--b1)','B1+':'var(--b1p)'};
+  tabs.forEach((t,i)=>{
+    const btn=document.createElement('button');
+    btn.className='tab-btn'+(i===0?' active':'');
+    const dot=`<span class="level-dot" style="background:${lvlColors[t.level]||'var(--muted2)'}"></span>`;
+    btn.innerHTML=dot+t.icon+' '+t.title;
+    btn.onclick=()=>switchTab(i);
+    bar.appendChild(btn);
+  });
+  switchTab(0);
+}
+
+function switchTab(i){
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  if(!renderedTabs[currentSection].has(i)){renderTab(i);renderedTabs[currentSection].add(i);}
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('visible'));
+  const panel=document.getElementById(`panel_${currentSection}_${i}`);
+  if(panel)panel.classList.add('visible');
+}
+
+function renderTab(i){
+  const t=SECTIONS[currentSection][i];
+  const container=document.getElementById('tabContents');
+  const panel=document.createElement('div');
+  panel.className='tab-panel visible';
+  panel.id=`panel_${currentSection}_${i}`;
+  const lvlColors={'A1':'var(--a1)','A2':'var(--a2)','B1':'var(--b1)','B1+':'var(--b1p)'};
+  const lc=lvlColors[t.level]||'var(--muted)';
+  let html=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+    <span style="font-family:var(--display);font-size:1.3rem;font-weight:900;color:${t.color}">${t.icon} ${t.title}</span>
+    <span style="background:${lc}22;color:${lc};border:1px solid ${lc}44;border-radius:999px;padding:2px 10px;font-size:.68rem;font-weight:900">${t.level}</span>
+  </div>
+  <div style="font-size:.83rem;color:var(--muted2);margin-bottom:18px;font-style:italic">${t.subtitle}</div>`;
+
+  // Explanation
+  if(t.expl){
+    html+=`<div class="expl-box">
+      <div class="expl-title" style="color:${t.color}">📖 ${t.expl.title}</div>
+      <div class="expl-body">${t.expl.body}</div>
+    </div>`;
+  }
+
+  // Flashcards
+  if(t.flashcards&&t.flashcards.length>0){
+    html+=`<div class="ex-card" style="margin-bottom:16px">
+    <div class="ex-title">🃏 Flashcards — haz clic para voltear</div>
+    <div class="fc-nav">
+      <button class="btn-fc" onclick="fcPrev('${currentSection}_${i}')">← Anterior</button>
+      <span class="fc-counter" id="fcctr_${currentSection}_${i}">1 / ${t.flashcards.length}</span>
+      <button class="btn-fc" onclick="fcNext('${currentSection}_${i}')">Siguiente →</button>
+    </div>
+    <div class="fc-scene" onclick="fcFlip('${currentSection}_${i}')">
+      <div class="fc-card" id="fc_${currentSection}_${i}">
+        <div class="fc-face fc-front">
+          <div class="fc-label">FORMA</div>
+          <div class="fc-form" id="fcfront_${currentSection}_${i}">${t.flashcards[0].front}</div>
+          <div class="fc-eng" id="fcfrontsub_${currentSection}_${i}">${t.flashcards[0].frontSub||''}</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-label">INGLÉS</div>
+          <div class="fc-form" style="font-size:1.2rem" id="fcback_${currentSection}_${i}">${t.flashcards[0].back}</div>
+          <div class="fc-example" id="fcex_${currentSection}_${i}">${t.flashcards[0].example||''}</div>
+        </div>
+      </div>
+    </div></div>`;
+  }
+
+  // Exercises
+  html+=`<div class="ex-wrap">`;
+  t.exercises.forEach((ex,ei)=>{
+    const key=`${currentSection}_${i}_${ei}`;
+    html+=`<div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-title">${ex.title}</div>
+      <div class="score-row">
+        <span class="score-pill" id="score_${key}">0 / ${ex.qs.length} respondidas</span>
+        <button class="btn-restart" onclick="restartEx('${key}',${i},${ei})">🔄 Reiniciar</button>
+      </div>
+    </div>`;
+
+    if(ex.type==='fill'){
+      if(ex.wb){
+        html+=`<div class="wordbank"><strong>Banco de palabras</strong>${ex.wb.join(' &nbsp;·&nbsp; ')}</div>`;
+      }
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const qkey=`${key}_${qi}`;
+        const parts=q.stem.split('___');
+        const stemHTML=parts.length>=2
+          ?`${parts[0]}<span class="blank" id="blank_${qkey}"></span>${parts.slice(1).join('___')}`
+          :q.stem;
+        html+=`<div class="q-item" id="qitem_${qkey}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${stemHTML}</div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <div class="chip-row" id="chips_${qkey}">
+            ${ex.wb.map(w=>`<button class="chip" onclick="answerChip('${qkey}','${w.replace(/'/g,"\\'")}','${q.a.replace(/'/g,"\\'")}','${key}')">${w}</button>`).join('')}
+          </div>
+          <div class="q-fb" id="fb_${qkey}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+
+    } else if(ex.type==='translate'){
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const qkey=`${key}_${qi}`;
+        html+=`<div class="q-item" id="qitem_${qkey}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${q.stem}</div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <input type="text" class="q-input" id="inp_${qkey}" placeholder="Escribe tu traducción..."
+            onkeydown="if(event.key==='Enter')checkTranslate('${qkey}','${q.a.replace(/'/g,"\\'")}','${key}')">
+          <button class="btn-check" onclick="checkTranslate('${qkey}','${q.a.replace(/'/g,"\\'")}','${key}')">Verificar ✓</button>
+          <div class="q-fb" id="fb_${qkey}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+
+    } else if(ex.type==='error'){
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const qkey=`${key}_${qi}`;
+        html+=`<div class="q-item" id="qitem_${qkey}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> 🔍 <em>${q.stem}</em></div>
+          <div class="q-sub">¿Hay un error? Si sí, corrígelo. Si no, escribe "correcta".</div>
+          <input type="text" class="q-input" id="inp_${qkey}" placeholder="Tu respuesta..."
+            onkeydown="if(event.key==='Enter')checkError('${qkey}','${q.a.replace(/'/g,"\\'")}','${(q.fb||'').replace(/'/g,"\\'")}','${key}')">
+          <button class="btn-check" onclick="checkError('${qkey}','${q.a.replace(/'/g,"\\'")}','${(q.fb||'').replace(/'/g,"\\'")}','${key}')">Verificar ✓</button>
+          <div class="q-fb" id="fb_${qkey}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+    }
+
+    html+=`</div>`;
+  });
+  html+=`</div>`;
+  panel.innerHTML=html;
+  container.appendChild(panel);
+
+  // Init flashcard state
+  if(t.flashcards&&t.flashcards.length>0){
+    fcState[`${currentSection}_${i}`]={idx:0,flipped:false,cards:t.flashcards};
+  }
+}
+
+// ── FLASHCARD ENGINE ──────────────────────────────────────────────────────────
+const fcState={};
+function fcFlip(key){
+  const card=document.getElementById('fc_'+key);
+  const s=fcState[key];if(!s)return;
+  s.flipped=!s.flipped;
+  card.classList.toggle('flipped',s.flipped);
+}
+function fcNext(key){
+  const s=fcState[key];if(!s)return;
+  s.idx=(s.idx+1)%s.cards.length;s.flipped=false;fcUpdate(key);
+}
+function fcPrev(key){
+  const s=fcState[key];if(!s)return;
+  s.idx=(s.idx-1+s.cards.length)%s.cards.length;s.flipped=false;fcUpdate(key);
+}
+function fcUpdate(key){
+  const s=fcState[key];
+  const card=document.getElementById('fc_'+key);
+  if(card)card.classList.remove('flipped');
+  const c=s.cards[s.idx];
+  const ff=document.getElementById('fcfront_'+key);if(ff)ff.textContent=c.front;
+  const fs=document.getElementById('fcfrontsub_'+key);if(fs)fs.textContent=c.frontSub||'';
+  const fb=document.getElementById('fcback_'+key);if(fb)fb.textContent=c.back;
+  const fe=document.getElementById('fcex_'+key);if(fe)fe.textContent=c.example||'';
+  const ctr=document.getElementById('fcctr_'+key);if(ctr)ctr.textContent=(s.idx+1)+' / '+s.cards.length;
+}
+
+// ── ANSWER FUNCTIONS ──────────────────────────────────────────────────────────
+function answerChip(qkey,chosen,correct,key){
+  if(answers[qkey]!==undefined)return;
+  const ok=normalize(chosen)===normalize(correct);
+  answers[qkey]=ok;
+  const blank=document.getElementById('blank_'+qkey);
+  if(blank){blank.textContent=chosen;blank.style.color=ok?'var(--good)':'var(--bad)';}
+  document.querySelectorAll(`#chips_${qkey} .chip`).forEach(btn=>{
+    btn.disabled=true;
+    if(normalize(btn.textContent)===normalize(chosen))btn.classList.add(ok?'chip-ok':'chip-err');
+    else btn.classList.add('used');
+  });
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=ok?'✅ ¡Correcto!':'❌ Respuesta correcta: <strong>'+correct+'</strong>';fb.classList.add('show');}
+  updateScore(key);
+}
+
+function checkTranslate(qkey,correct,key){
+  if(answers[qkey]!==undefined)return;
+  const inp=document.getElementById('inp_'+qkey);
+  if(!inp||!inp.value.trim()){alert('Escribe tu respuesta primero.');return;}
+  const ok=checkAns(inp.value,correct);
+  answers[qkey]=ok;
+  inp.disabled=true;inp.classList.add(ok?'inp-ok':'inp-err');
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=ok?'✅ ¡Muy bien!':'❌ Referencia: <strong>'+correct+'</strong>';fb.classList.add('show');}
+  const btn=inp.nextElementSibling;if(btn)btn.disabled=true;
+  updateScore(key);
+}
+
+function checkError(qkey,correct,fbText,key){
+  if(answers[qkey]!==undefined)return;
+  const inp=document.getElementById('inp_'+qkey);
+  if(!inp||!inp.value.trim()){alert('Escribe tu respuesta primero.');return;}
+  const ok=checkAns(inp.value,correct);
+  answers[qkey]=ok;
+  inp.disabled=true;inp.classList.add(ok?'inp-ok':'inp-err');
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=(ok?'✅ ':'❌ ')+(fbText||('Respuesta correcta: <strong>'+correct+'</strong>'));fb.classList.add('show');}
+  const btn=inp.nextElementSibling;if(btn)btn.disabled=true;
+  updateScore(key);
+}
+
+function updateScore(key){
+  const parts=key.split('_');
+  const sec=parts[0],ti=parseInt(parts[1]),ei=parseInt(parts[2]);
+  const ex=SECTIONS[sec][ti].exercises[ei];
+  const done=ex.qs.filter((_,qi)=>answers[`${key}_${qi}`]!==undefined).length;
+  const sc=document.getElementById('score_'+key);if(sc)sc.textContent=done+' / '+ex.qs.length+' respondidas';
+}
+
+function restartEx(key,ti,ei){
+  const sec=currentSection;
+  const ex=SECTIONS[sec][ti].exercises[ei];
+  ex.qs.forEach((_,qi)=>{
+    const qkey=`${key}_${qi}`;
+    delete answers[qkey];
+    const blank=document.getElementById('blank_'+qkey);if(blank){blank.textContent='';blank.style.color='var(--cyan)';}
+    document.querySelectorAll(`#chips_${qkey} .chip`).forEach(b=>{b.disabled=false;b.className='chip';});
+    const inp=document.getElementById('inp_'+qkey);if(inp){inp.disabled=false;inp.value='';inp.className='q-input';}
+    const fb=document.getElementById('fb_'+qkey);if(fb){fb.innerHTML='';fb.className='q-fb';}
+    const item=document.getElementById('qitem_'+qkey);
+    if(item){const btn=item.querySelector('.btn-check');if(btn)btn.disabled=false;}
+  });
+  updateScore(key);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+showSection('existencia');
+</script>
+</body>
+</html>
